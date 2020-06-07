@@ -6,7 +6,9 @@ import {
   Link
 } from "react-router-dom";
 import Home from "./components/Home";
-import Users from "./components/Users";
+import DisplayUsers from "./components/DisplayUsers";
+import DisplayUser from "./components/DisplayUser";
+import UserForm from "./components/UserForm";
 
 
 const App=()=> {
@@ -21,15 +23,17 @@ const App=()=> {
             <li>
               <Link to="/users">Users</Link>
             </li>
+            <li>
+              <Link to="/form">Create User</Link>
+            </li>
           </ul>
         </nav>
         <Switch>
-          <Route path="/users">
-            <Users />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
+          <Route path="/users/update/:id" render={ props =><UserForm type="update" {...props} />} />
+          <Route path="/users/:id" component={DisplayUser} />
+          <Route path="/users" component={DisplayUsers} />
+          <Route path="/form" render={()=><UserForm type="create" />} />
+          <Route exact path="/" component={Home} />
         </Switch>
       </div>
     </Router>

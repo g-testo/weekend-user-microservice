@@ -2,6 +2,9 @@ package com.jgs.userMicroservice.controller;
 
 import java.util.List;
 
+import com.jgs.userMicroservice.model.User;
+import com.jgs.userMicroservice.service.UserServiceImpl;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -9,10 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.jgs.userMicroservice.model.User;
-import com.jgs.userMicroservice.service.UserServiceImpl;
 
 @RestController
 public class MainController {
@@ -37,12 +38,12 @@ public class MainController {
 	}
 	@CrossOrigin()
 	@PostMapping("/users")
-	public void postUser(User user) {
+	public void postUser(@RequestBody User user) {
 		userServiceImpl.createUser(user);
 	}
 	@CrossOrigin()
 	@PutMapping("/users/{id}")
-	public void putUser(@PathVariable Long id, User user) {
+	public void putUser(@PathVariable Long id, @RequestBody User user) {
 		userServiceImpl.updateUserById(id, user);
 	}
 	@CrossOrigin()
